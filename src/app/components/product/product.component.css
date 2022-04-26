@@ -1,0 +1,16 @@
+.product-img:hover .cart{
+    /* display: block !important; */
+    opacity: 1;
+    /* transform: scale(1.1); */
+}
+
+.cart{
+    /* display: none; */
+    opacity: 0;
+    transition: 0.3s all;
+    cursor: pointer;
+}
+
+.cart:hover{
+    transform: scale(1.1);
+}
