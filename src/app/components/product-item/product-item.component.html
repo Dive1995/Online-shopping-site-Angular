@@ -1,0 +1,59 @@
+<div class="container-md">
+  <div
+    style="max-width: 1000px; height: 75vh; margin: 0 auto"
+    class="d-lg-flex"
+  >
+    <div class="row align-items-center">
+      <div class="col-md-6 col-xl-7">
+        <div class="p-2">
+          <img src="assets/images/img-3.jpg" alt="" style="width: 100%" />
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-5 mt-2">
+        <div class="ps-5">
+          <h2 class="display-3">Slim Jacket</h2>
+          <p class="display-6" style="font-size: 1.2rem; color: #216869">
+            Rs. 450
+          </p>
+          <br />
+          <form [formGroup]="form" (submit)="addToCart()">
+            <p class="" style="font-size: 13px">Select Size</p>
+            <div class="size">
+              <input type="radio" value="s" id="small" formControlName="size" />
+              <div>
+                <label for="small">S</label>
+              </div>
+              <input
+                type="radio"
+                value="m"
+                id="medium"
+                formControlName="size"
+              />
+              <div>
+                <label for="medium">M</label>
+              </div>
+            </div>
+            <br />
+
+            <div class="d-flex flex-row">
+              <select formControlName="quantity" id="" class="quantity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              <button class="btn btn-outline-primary ms-3">Add to cart</button>
+            </div>
+          </form>
+          <p
+            class="mt-4 display-6"
+            style="text-align: justify; font-size: 15px"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste
+            porro, aliquam asperiores natus, reiciendis eligendi pariatur
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

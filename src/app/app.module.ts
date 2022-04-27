@@ -13,6 +13,7 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductsPageComponent } from './components/products-page/products-page.component';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import { ProductItemComponent } from './components/product-item/product-item.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
     RegisterComponent,
     ProductComponent,
     ProductsPageComponent,
+    ProductItemComponent,
   ],
   imports: [
     BrowserModule,
