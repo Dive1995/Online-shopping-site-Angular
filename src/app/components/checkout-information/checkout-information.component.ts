@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IShippingInfo } from 'src/app/models/shippingInfo';
 
 @Component({
@@ -8,11 +9,15 @@ import { IShippingInfo } from 'src/app/models/shippingInfo';
   styleUrls: ['./checkout-information.component.css']
 })
 export class CheckoutInformationComponent implements OnInit {
-  // form: FormGroup = new FormGroup();
 
-  constructor() { }
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  routeToShipping(): void{
+
+    this.router.navigate(['/checkout/shipping']);
+  }
 }

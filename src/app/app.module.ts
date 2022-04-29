@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { RouterModule } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
@@ -11,8 +14,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsPageComponent } from './components/products-page/products-page.component';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -21,6 +22,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CheckoutInformationComponent } from './components/checkout-information/checkout-information.component';
 import { CheckoutShippingComponent } from './components/checkout-shipping/checkout-shipping.component';
 import { CheckoutPaymentComponent } from './components/checkout-payment/checkout-payment.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CheckoutGuard } from './guards/checkout.guard';
 
 @NgModule({
   declarations: [
@@ -38,13 +41,30 @@ import { CheckoutPaymentComponent } from './components/checkout-payment/checkout
     CheckoutInformationComponent,
     CheckoutShippingComponent,
     CheckoutPaymentComponent,
-
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterModule.forRoot([
+      { path: 'home', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'products', component: ProductsPageComponent, children: [
+
+      ] },
+      { path: 'cart', component: CartComponent },
+      { path: 'checkout', canActivate: [CheckoutGuard], component: CheckoutComponent, children:[
+        { path: '', redirectTo: 'information', pathMatch: 'full' },
+        { path: 'information', component: CheckoutInformationComponent },
+        { path: 'shipping', component: CheckoutShippingComponent },
+        { path: 'payment', component: CheckoutPaymentComponent },
+      ] },
+      { path: '', redirectTo: 'home', pathMatch: 'full'},
+      { path: '**', component:PageNotFoundComponent},
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

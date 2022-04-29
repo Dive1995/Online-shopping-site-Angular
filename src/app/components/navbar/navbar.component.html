@@ -5,7 +5,7 @@
     </a>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link text-secondary" href="#">Home</a>
+        <a class="nav-link text-secondary" [routerLink]="['/home']">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-secondary" href="#">Men</a>
@@ -22,12 +22,12 @@
     </ul>
     <ul class="nav justify-content-end">
       <li class="nav-item">
-        <a class="nav-link text-secondary" href="#">
+        <a class="nav-link text-secondary" routerLink="/cart">
           <fa-icon [icon]="['fas', 'cart-shopping']"></fa-icon>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-secondary" href="#"> Sign In </a>
+        <a class="nav-link text-secondary" routerLink="/login"> Sign In </a>
       </li>
     </ul>
   </div>

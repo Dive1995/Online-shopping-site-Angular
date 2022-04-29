@@ -26,10 +26,13 @@
       </label>
     </div>
     <div class="mt-5 d-flex justify-content-between">
-      <button class="btn text-secondary">
+      <button class="btn text-secondary" routerLink="/checkout/information">
         <fa-icon [icon]="['fas', 'angle-left']"></fa-icon> &nbsp; Information
       </button>
-      <button class="btn btn-danger align-items-center">
+      <button
+        class="btn btn-danger align-items-center"
+        (click)="routeToPayment()"
+      >
         Continue to Payment &nbsp;
         <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
       </button>

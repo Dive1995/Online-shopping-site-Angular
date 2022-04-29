@@ -12,4 +12,8 @@ export class CheckoutPaymentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  confirmOrder(): void{
+    console.log("Confirmed order with details...");
+    
+  }
 }

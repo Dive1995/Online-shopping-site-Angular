@@ -11,7 +11,11 @@
         <div
           class="checkout-paths d-flex justify-content-center align-items-center mt-4"
         >
-          <a class="fs-6 display-6 me-3 text-secondary">Information</a>
+          <a
+            class="fs-6 display-6 me-3 text-secondary"
+            routerLink="/chckout/information"
+            >Information</a
+          >
           <fa-icon
             class="fs-6 display-6 me-3 text-secondary"
             [icon]="['fas', 'angle-right']"
@@ -25,9 +29,7 @@
         </div>
         <hr />
         <!-- <div class="line"></div> -->
-        <!-- <app-checkout-information></app-checkout-information> -->
-        <!-- <app-checkout-shipping></app-checkout-shipping> -->
-        <app-checkout-payment></app-checkout-payment>
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>

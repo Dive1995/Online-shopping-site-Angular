@@ -49,8 +49,10 @@
         <div
           class="mt-5 d-flex flex-column flex-sm-row justify-content-between"
         >
-          <button class="btn btn-dark">Continue Shopping</button>
-          <button class="btn btn-danger">Checkout</button>
+          <button class="btn btn-dark" (click)="goToPreviousPage()">
+            Continue Shopping
+          </button>
+          <button class="btn btn-danger" (click)="checkout()">Checkout</button>
         </div>
       </form>
     </div>
