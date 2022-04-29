@@ -14,6 +14,13 @@ import { ProductsPageComponent } from './components/products-page/products-page.
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { ProductItemComponent } from './components/product-item/product-item.component';
+import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CheckoutInformationComponent } from './components/checkout-information/checkout-information.component';
+import { CheckoutShippingComponent } from './components/checkout-shipping/checkout-shipping.component';
+import { CheckoutPaymentComponent } from './components/checkout-payment/checkout-payment.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +31,14 @@ import { ProductItemComponent } from './components/product-item/product-item.com
     ProductComponent,
     ProductsPageComponent,
     ProductItemComponent,
+    HomeComponent,
+    FooterComponent,
+    CartComponent,
+    CheckoutComponent,
+    CheckoutInformationComponent,
+    CheckoutShippingComponent,
+    CheckoutPaymentComponent,
+
   ],
   imports: [
     BrowserModule,

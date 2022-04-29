@@ -1,0 +1,19 @@
+.option{
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    background-color: #f9f9f9;
+}
+
+
+input{
+    display: none;
+}
+
+input:checked + label {
+    /* color: #dc3545; */
+    border: 2px solid #26c485;
+    background-color: #ccfbe8;
+}

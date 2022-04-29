@@ -1,0 +1,94 @@
+/* top banner */
+
+.banner{
+      /* height: 250px; */
+      height: 60vh;
+      background-size: contain;
+      background-position: center center;
+}
+
+/* Category Section */
+
+.categories{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.category-item{
+    background-color: #f5f5f5;
+    height: 150px;
+    width: 250px;
+    margin: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.category-item p{
+    position: absolute;
+}
+
+/* Trending */
+.trending{
+    margin-top: 6rem;
+}
+
+/* Trending products || New arrivals products */
+
+.products {
+    scrollbar-width: none;  /* Firefox */
+}
+.products::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+/* Discount */
+
+.discount{
+    margin-top: 8rem;
+    height: 40vh;
+    background-size: contain;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.discount h3{
+    position: absolute;
+    letter-spacing: 1px;
+}
+
+/* New arrivals */
+.new-arrivals{
+    margin-top: 8rem;
+}
+
+
+@media only screen and (max-width: 576px) {
+    .banner{
+        height:250px !important;
+    }
+}
+
+/* 
+@media only screen and (min-width: 768px) {
+    .banner{
+        height:400px !important;
+    }
+}  */

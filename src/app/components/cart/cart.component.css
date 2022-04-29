@@ -1,0 +1,25 @@
+a{
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+a:hover fa-icon{
+    color: #dc3545;
+}
+
+.cart-container{
+    max-width: 900px;
+    margin: 4rem auto;
+    height: 65vh;
+}
+
+.quantity{
+    padding: 10px;
+    border: 2px solid #e5e5e5;
+    border-radius: 2px;
+}
+
+.total{
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    padding-top: 1rem;
+}

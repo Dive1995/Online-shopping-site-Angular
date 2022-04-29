@@ -1,0 +1,62 @@
+<div class="container-md">
+  <div class="cart-container">
+    <div *ngIf="cart.length > 0">
+      <h3 class="display-6 fs-2 mb-4">{{ cart.length }} items in your cart</h3>
+      <br />
+
+      <div class="row">
+        <h6 class="col-7 fs-4">Item</h6>
+        <h6 class="col-2 fs-4">Quantity</h6>
+        <h6 class="col-2 fs-4">Price</h6>
+        <span class="col-1"></span>
+      </div>
+      <hr />
+
+      <form>
+        <div *ngFor="let item of cart" class="row mb-3">
+          <div class="col-7 d-flex align-items-center">
+            <img
+              src="{{ item.product.image }}"
+              alt=""
+              style="width: 70px"
+              class="me-4"
+            />
+            <p class="fs-5">{{ item.product.name }} {{ item.size }}</p>
+          </div>
+          <div class="col-2 align-self-center mb-2">
+            <select name="quantity" id="" class="quantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <!-- <p class="col-2 align-self-center">{{ item.quantity }}</p> -->
+          <p class="col-2 align-self-center">{{ item.product.price }}</p>
+          <a class="col-1 align-self-center text-black-50">
+            <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+          </a>
+        </div>
+        <div class="row">
+          <div class="col-7"></div>
+          <div class="col-2 fw-bold total">
+            <p>Total</p>
+          </div>
+          <div class="col-2 fw-bold total"><p>600</p></div>
+          <div class="col-1"></div>
+        </div>
+
+        <div
+          class="mt-5 d-flex flex-column flex-sm-row justify-content-between"
+        >
+          <button class="btn btn-dark">Continue Shopping</button>
+          <button class="btn btn-danger">Checkout</button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="cart.length == 0">
+      <h3>Add something to your cart !</h3>
+    </div>
+  </div>
+</div>

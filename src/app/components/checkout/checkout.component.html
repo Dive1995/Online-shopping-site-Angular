@@ -1,0 +1,67 @@
+<div class="main row">
+  <!-- Checkout Side -->
+  <div class="col-12 col-md-7 d-flex justify-content-end p-0">
+    <div class="checkout">
+      <div class="head">
+        <!-- logo -->
+        <h1 class="display-5 fw-bold text-secondary text-center mt-4">
+          Trends.
+        </h1>
+        <!-- paths -->
+        <div
+          class="checkout-paths d-flex justify-content-center align-items-center mt-4"
+        >
+          <a class="fs-6 display-6 me-3 text-secondary">Information</a>
+          <fa-icon
+            class="fs-6 display-6 me-3 text-secondary"
+            [icon]="['fas', 'angle-right']"
+          ></fa-icon>
+          <a class="fs-6 display-6 me-3 text-secondary">Shipping</a>
+          <fa-icon
+            class="fs-6 display-6 me-3 text-secondary"
+            [icon]="['fas', 'angle-right']"
+          ></fa-icon>
+          <a class="fs-6 display-6 me-3 text-secondary">Payment</a>
+        </div>
+        <hr />
+        <!-- <div class="line"></div> -->
+        <!-- <app-checkout-information></app-checkout-information> -->
+        <!-- <app-checkout-shipping></app-checkout-shipping> -->
+        <app-checkout-payment></app-checkout-payment>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Side -->
+  <div class="col-12 col-md-5 bg-light">
+    <div class="products">
+      <div *ngFor="let item of cart" class="row mb-3">
+        <div class="col-8 d-flex align-items-center">
+          <img
+            src="{{ item.product.image }}"
+            alt=""
+            style="width: 50px"
+            class="me-4"
+          />
+          <p class="fs-6">{{ item.product.name }}, {{ item.size }}</p>
+        </div>
+        <p class="col-2 align-self-center">{{ item.quantity }}</p>
+        <p class="col-2 align-self-center">{{ item.product.price }}</p>
+      </div>
+      <hr />
+      <div class="d-flex justify-content-between">
+        <p>Subtotal ({{ cart.length }} items)</p>
+        <p class="pe-3">600</p>
+      </div>
+      <div class="d-flex justify-content-between">
+        <p>Shipping</p>
+        <p class="pe-3">60</p>
+      </div>
+      <div class="d-flex justify-content-between">
+        <p class="fw-bold">Total</p>
+        <p class="fw-bold pe-3">Rs 660</p>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>

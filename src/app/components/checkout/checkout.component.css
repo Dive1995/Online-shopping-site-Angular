@@ -1,0 +1,30 @@
+
+.main{
+    height: 100vh;
+    margin: 0;
+}
+
+/* Checkout Side */
+.checkout{
+    height: 100%;
+    width: 692px;
+    margin-right: 0;
+}
+
+.head{
+    padding: 2rem 3.5rem;
+}
+
+.line{
+    max-width: 400px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+}
+
+
+/* Product Side */
+.products{
+    padding: 3rem;
+    max-width: 488px;
+}
