@@ -1,15 +1,12 @@
-
-.product-img:hover .cart{
-    opacity: 1;
+.product-img{
+    overflow: hidden !important;
 }
 
-.cart{
-    /* display: none; */
-    opacity: 0;
-    transition: 0.3s all;
-    cursor: pointer;
-}
 
-.cart:hover{
-    transform: scale(1.1);
+.product-img img {
+    transition: transform .5s ease;
+}
+  
+.product-img:hover img {
+    transform: scale(1.2);
 }

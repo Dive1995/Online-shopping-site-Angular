@@ -1,31 +1,55 @@
 <div class="mt-5">
   <h3 class="mt-4">Payment Method</h3>
-  <form class="mt-4">
-    <div>
-      <input
-        type="radio"
-        name="delivery"
-        id="standard"
-        value="cash on delivery"
-        checked
-      />
-      <label for="standard" class="option"> Cash on Delivery </label>
-    </div>
-    <div>
-      <input type="radio" name="delivery" id="express" value="credit card" />
-      <label for="express" class="option"> Credit Card </label>
-    </div>
-    <div class="mt-5 d-flex justify-content-between">
-      <button class="btn text-secondary" routerLink="/checkout/shipping">
-        <fa-icon [icon]="['fas', 'angle-left']"></fa-icon> &nbsp; Shipping
-      </button>
-      <button
-        class="btn btn-danger align-items-center"
-        (click)="confirmOrder()"
-      >
-        Confirm Order &nbsp;
-        <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
-      </button>
-    </div>
-  </form>
+  <div>
+    <input
+      type="radio"
+      name="delivery"
+      id="standard"
+      value="cash on delivery"
+      [(ngModel)]="payment"
+    />
+    <label for="standard" class="option"> Cash on Delivery </label>
+  </div>
+  <div>
+    <input
+      type="radio"
+      name="delivery"
+      id="express"
+      value="credit card"
+      [(ngModel)]="payment"
+      disabled
+    />
+    <label for="express" class="option text-secondary"> Credit Card </label>
+  </div>
+  <!--  -->
+  <!-- <input type="text" [(ngModel)]="payment" />
+  {{ payment }}
+
+  <input
+    type="radio"
+    name="payment"
+    id="cash"
+    value="cash"
+    
+  />
+  <label for="cash">Cash</label>
+  <input
+    type="radio"
+    name="payment"
+    id="card"
+    value="card"
+    [(ngModel)]="payment"
+  />
+  <label for="card">Card</label> -->
+
+  <!--  -->
+  <div class="mt-5 d-flex justify-content-between">
+    <button class="btn text-secondary" (click)="goBackToShipping()">
+      <fa-icon [icon]="['fas', 'angle-left']"></fa-icon> &nbsp; Shipping
+    </button>
+    <button class="btn btn-danger align-items-center" (click)="confirmOrder()">
+      Confirm Order &nbsp;
+      <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
+    </button>
+  </div>
 </div>

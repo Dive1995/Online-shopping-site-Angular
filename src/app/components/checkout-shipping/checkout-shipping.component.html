@@ -1,11 +1,29 @@
-<div class="mt-5">
-  <div class="d-flex justify-content-between">
-    <p class="text-secondary">Ships to : Jaffna, Sri Lanka</p>
-    <a href="" class="text-secondary text-decoration-underline">Change</a>
-  </div>
+<div class="mt-2">
   <h3 class="mt-4">Delivery Options</h3>
-  <form class="mt-4">
-    <div>
+
+  <!-- form -->
+
+  <div *ngFor="let option of deliveryOptions">
+    <input
+      type="radio"
+      id="{{ option.type }}"
+      value="{{ option.type }}"
+      [checked]="option.type == 'standard'"
+      [(ngModel)]="selectedDeliveryOption"
+      (change)="setDeliveryOptions(option.type)"
+    />
+    <label
+      for="{{ option.type }}"
+      class="option d-flex justify-content-between"
+    >
+      <span>{{ option.type }} Shipping</span>
+      <span>Rs. {{ option.price }}</span>
+    </label>
+  </div>
+
+  <!-- (change)="goToPayment.emit(option)" -->
+
+  <!-- <div>
       <input
         type="radio"
         name="delivery"
@@ -15,7 +33,7 @@
       />
       <label for="standard" class="option d-flex justify-content-between">
         <span>Standard Shipping</span>
-        <span>Rs. 250</span>
+        <span>Rs. {{ standardShipping.price }}</span>
       </label>
     </div>
     <div>
@@ -24,18 +42,19 @@
         <span>Express Shipping</span>
         <span>Rs. 450</span>
       </label>
-    </div>
-    <div class="mt-5 d-flex justify-content-between">
-      <button class="btn text-secondary" routerLink="/checkout/information">
-        <fa-icon [icon]="['fas', 'angle-left']"></fa-icon> &nbsp; Information
-      </button>
-      <button
-        class="btn btn-danger align-items-center"
-        (click)="routeToPayment()"
-      >
-        Continue to Payment &nbsp;
-        <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
-      </button>
-    </div>
-  </form>
+    </div> -->
+
+  <!-- buttons -->
+  <div class="mt-5 d-flex justify-content-between">
+    <button class="btn text-secondary" (click)="routeToInformation()">
+      <fa-icon [icon]="['fas', 'angle-left']"></fa-icon> &nbsp; Information
+    </button>
+    <button
+      class="btn btn-danger align-items-center"
+      (click)="routeToPayment()"
+    >
+      Continue to Payment &nbsp;
+      <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
+    </button>
+  </div>
 </div>

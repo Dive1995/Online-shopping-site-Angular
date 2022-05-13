@@ -8,13 +8,19 @@
         <a class="nav-link text-secondary" [routerLink]="['/home']">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-secondary" href="#">Men</a>
+        <a class="nav-link text-secondary" [routerLink]="['/products/men']"
+          >Men</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link text-secondary" href="#">Women</a>
+        <a class="nav-link text-secondary" [routerLink]="['/products/women']"
+          >Women</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link text-secondary" href="#">Kids</a>
+        <a class="nav-link text-secondary" [routerLink]="['/products/kids']"
+          >Kids</a
+        >
       </li>
       <li class="nav-item">
         <a class="nav-link text-secondary" href="#">Contact Us</a>
@@ -24,10 +30,28 @@
       <li class="nav-item">
         <a class="nav-link text-secondary" routerLink="/cart">
           <fa-icon [icon]="['fas', 'cart-shopping']"></fa-icon>
+          <span class="ms-2" *ngIf="cartCount > 0">{{ cartCount }}</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-secondary" routerLink="/login"> Sign In </a>
+        <a class="nav-link text-secondary" routerLink="/login" *ngIf="!user">
+          Sign In
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary" *ngIf="user" style="cursor: pointer">
+          {{ user?.userName }}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          style="cursor: pointer"
+          class="nav-link text-secondary"
+          (click)="logOut()"
+          *ngIf="user"
+        >
+          Log out
+        </a>
       </li>
     </ul>
   </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -13,12 +14,16 @@ export class LoginComponent implements OnInit {
   user: any;
   errorMessage!: string;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private authService: AuthService,
+    private route: Router
+    ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ''
+      password: ['', [Validators.required]]
     })
   }
 
@@ -26,8 +31,12 @@ export class LoginComponent implements OnInit {
     // console.log(this.form.getRawValue());
     if(this.form.valid){
       this.authService.logInUser(this.form.getRawValue()).subscribe({
-        next: (user: any) => this.user = user,
-        error: (err: string) => this.errorMessage = err
+        next: (user: any) => {
+          this.user = user;
+          console.log(this.user);
+          this.route.navigate(['/home'])
+        },
+        error: (err: any) => console.log(err.error)
       })
       
       
@@ -35,6 +44,6 @@ export class LoginComponent implements OnInit {
       console.log(this.form.errors);
       alert("failed! validation error")
     }
-    console.log(this.user);
+
   }
 }

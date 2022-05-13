@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -45,6 +45,7 @@ import { CheckoutGuard } from './guards/checkout.guard';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,
@@ -52,16 +53,17 @@ import { CheckoutGuard } from './guards/checkout.guard';
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'products', component: ProductsPageComponent, children: [
-
-      ] },
+      { path: 'products/:section', component: ProductsPageComponent },
+      { path: 'product/:id', component: ProductItemComponent },
       { path: 'cart', component: CartComponent },
-      { path: 'checkout', canActivate: [CheckoutGuard], component: CheckoutComponent, children:[
-        { path: '', redirectTo: 'information', pathMatch: 'full' },
-        { path: 'information', component: CheckoutInformationComponent },
-        { path: 'shipping', component: CheckoutShippingComponent },
-        { path: 'payment', component: CheckoutPaymentComponent },
-      ] },
+      { path: 'checkout', canActivate: [CheckoutGuard], component: CheckoutComponent, 
+      // children:[
+      //   { path: '', redirectTo: 'information', pathMatch: 'full' },
+      //   { path: 'information', component: CheckoutInformationComponent },
+      //   { path: 'shipping', component: CheckoutShippingComponent },
+      //   { path: 'payment', component: CheckoutPaymentComponent },
+      // ] 
+    },
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component:PageNotFoundComponent},
     ])

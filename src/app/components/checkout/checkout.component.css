@@ -28,3 +28,8 @@
     padding: 3rem;
     max-width: 488px;
 }
+
+/* Highlights the current tab */
+.active-link{
+    font-weight: bold;
+}

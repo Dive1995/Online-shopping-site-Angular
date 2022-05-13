@@ -1,9 +1,13 @@
 <div class="container-md">
   <div class="cart-container">
+    <h3 class="display-6 fs-2 mb-4">{{ cart.length }} items in your cart</h3>
+    <br />
+    <!-- No products in cart -->
+    <div *ngIf="cart.length == 0">
+      <h3 class="text-secondary text-center">Add something to your cart !</h3>
+    </div>
+    <!-- Show cart items -->
     <div *ngIf="cart.length > 0">
-      <h3 class="display-6 fs-2 mb-4">{{ cart.length }} items in your cart</h3>
-      <br />
-
       <div class="row">
         <h6 class="col-7 fs-4">Item</h6>
         <h6 class="col-2 fs-4">Quantity</h6>
@@ -21,19 +25,38 @@
               style="width: 70px"
               class="me-4"
             />
-            <p class="fs-5">{{ item.product.name }} {{ item.size }}</p>
+            <p class="">
+              {{ item.product.name }},
+              <span class="fw-bold">{{ item.size | uppercase }}</span>
+            </p>
           </div>
           <div class="col-2 align-self-center mb-2">
-            <select name="quantity" id="" class="quantity">
+            <select
+              [name]="'quantity' + item.quantity"
+              id=""
+              class="quantity"
+              [value]="item.quantity"
+              [(ngModel)]="item.quantity"
+              (ngModelChange)="updateCart(item, $event)"
+            >
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
             </select>
           </div>
           <!-- <p class="col-2 align-self-center">{{ item.quantity }}</p> -->
           <p class="col-2 align-self-center">{{ item.product.price }}</p>
-          <a class="col-1 align-self-center text-black-50">
+          <a
+            class="col-1 align-self-center text-black-50"
+            (click)="removeItem(item)"
+          >
             <fa-icon [icon]="['fas', 'trash']"></fa-icon>
           </a>
         </div>
@@ -42,7 +65,9 @@
           <div class="col-2 fw-bold total">
             <p>Total</p>
           </div>
-          <div class="col-2 fw-bold total"><p>600</p></div>
+          <div class="col-2 fw-bold total">
+            <p>{{ total }}</p>
+          </div>
           <div class="col-1"></div>
         </div>
 
@@ -55,10 +80,6 @@
           <button class="btn btn-danger" (click)="checkout()">Checkout</button>
         </div>
       </form>
-    </div>
-
-    <div *ngIf="cart.length == 0">
-      <h3>Add something to your cart !</h3>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,14 +8,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./checkout-shipping.component.css']
 })
 export class CheckoutShippingComponent implements OnInit {
+  @Output() goBack = new EventEmitter();
+  @Output() setOption = new EventEmitter();
+  @Output() goToPayment = new EventEmitter();
 
-  constructor(private router: Router) { }
+  @Input() deliveryOptions: any;
+
+  @Input() selectedDeliveryOption: any;
+
+  constructor(private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+   
+  }
+
+  setDeliveryOptions(option: string){
+    console.log("changing option : " + option);
+    this.setOption.emit(option);
+  }
+
+  routeToInformation(){
+    console.log("go back");
+    
+    this.goBack.emit();
   }
 
   routeToPayment(): void{
-    this.router.navigate(['/checkout/payment']);
+    this.goToPayment.emit(this.selectedDeliveryOption);
   }
-
 }

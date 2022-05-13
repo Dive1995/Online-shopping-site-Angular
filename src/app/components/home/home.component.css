@@ -1,9 +1,11 @@
+
+
 /* top banner */
 
 .banner{
       /* height: 250px; */
       height: 60vh;
-      background-size: contain;
+      background-size: cover;
       background-position: center center;
 }
 

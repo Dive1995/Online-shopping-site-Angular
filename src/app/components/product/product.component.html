@@ -1,17 +1,16 @@
-<div class="product-img position-relative">
-  <img
-    src="assets/images/img-3.jpg"
-    alt="{{ product.image }}"
-    style="width: 100%; height: auto"
-    class="rounded"
-  />
-  <div
-    class="cart position-absolute bottom-0 end-0 p-2 m-2 text-white bg-black rounded-3"
-  >
-    <fa-icon [icon]="['fas', 'cart-shopping']"></fa-icon>
+<a [routerLink]="['/product', product.id]">
+  <div class="product-img position-relative">
+    <img
+      src="{{ product.image }}"
+      alt="{{ product.image }}"
+      style="width: 100%; height: auto"
+      class="rounded"
+    />
   </div>
-</div>
-<a style="color: #011936; letter-spacing: 1.2px; font-size: 14px" href="#">{{
-  product.name
-}}</a>
-<p style="color: #216869">$ {{ product.price }}</p>
+  <a
+    class="text-center"
+    style="color: #011936; letter-spacing: 1.2px; font-size: 14px"
+    >{{ product.name }}</a
+  >
+  <p style="color: #216869">$ {{ product.price }}</p>
+</a>

@@ -13,23 +13,62 @@
         >
           <a
             class="fs-6 display-6 me-3 text-secondary"
-            routerLink="/chckout/information"
+            [ngClass]="{ 'active-link': step == 1 }"
             >Information</a
           >
           <fa-icon
             class="fs-6 display-6 me-3 text-secondary"
             [icon]="['fas', 'angle-right']"
           ></fa-icon>
-          <a class="fs-6 display-6 me-3 text-secondary">Shipping</a>
+          <a
+            class="fs-6 display-6 me-3 text-secondary"
+            [ngClass]="{ 'active-link': step == 2 }"
+            >Shipping</a
+          >
           <fa-icon
             class="fs-6 display-6 me-3 text-secondary"
             [icon]="['fas', 'angle-right']"
           ></fa-icon>
-          <a class="fs-6 display-6 me-3 text-secondary">Payment</a>
+          <a
+            class="fs-6 display-6 me-3 text-secondary"
+            [ngClass]="{ 'active-link': step == 3 }"
+            >Payment</a
+          >
         </div>
         <hr />
-        <!-- <div class="line"></div> -->
-        <router-outlet></router-outlet>
+
+        <!-- Sugg: Use services with routing -->
+        <!-- <router-outlet></router-outlet> -->
+        <app-checkout-information
+          (sendShippingDetails)="getShipping($event)"
+          [existingShippingDetail]="shipping"
+          *ngIf="step == 1"
+        ></app-checkout-information>
+        <div *ngIf="step == 2">
+          <div class="d-flex justify-content-between">
+            <p class="text-secondary">Ships to : {{ shipping?.address }}</p>
+            <a
+              class="text-secondary text-decoration-underline"
+              style="cursor: pointer"
+              (click)="goToPreviousStep()"
+              >Change</a
+            >
+          </div>
+          <app-checkout-shipping
+            (goBack)="goToPreviousStep()"
+            (goToPayment)="goToPaymentPage($event)"
+            [deliveryOptions]="deliveryOptions"
+            (setOption)="setDeliveryOption($event)"
+            [selectedDeliveryOption]="selectedDeliveryOption"
+          ></app-checkout-shipping>
+        </div>
+
+        <app-checkout-payment
+          *ngIf="step == 3"
+          (goBack)="goToPreviousStep()"
+          (placeOrder)="confirmOrder($event)"
+          [payment]="paymentMethod"
+        ></app-checkout-payment>
       </div>
     </div>
   </div>
@@ -45,7 +84,9 @@
             style="width: 50px"
             class="me-4"
           />
-          <p class="fs-6">{{ item.product.name }}, {{ item.size }}</p>
+          <p class="fs-6">
+            {{ item.product.name }}, {{ item.size | uppercase }}
+          </p>
         </div>
         <p class="col-2 align-self-center">{{ item.quantity }}</p>
         <p class="col-2 align-self-center">{{ item.product.price }}</p>
@@ -53,15 +94,15 @@
       <hr />
       <div class="d-flex justify-content-between">
         <p>Subtotal ({{ cart.length }} items)</p>
-        <p class="pe-3">600</p>
+        <p class="pe-3">{{ total }}</p>
       </div>
       <div class="d-flex justify-content-between">
         <p>Shipping</p>
-        <p class="pe-3">60</p>
+        <p class="pe-3">{{ shippingPrice }}</p>
       </div>
       <div class="d-flex justify-content-between">
         <p class="fw-bold">Total</p>
-        <p class="fw-bold pe-3">Rs 660</p>
+        <p class="fw-bold pe-3">{{ subtotal }}</p>
       </div>
       <hr />
     </div>

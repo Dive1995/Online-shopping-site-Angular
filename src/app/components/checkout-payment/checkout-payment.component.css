@@ -9,8 +9,12 @@
 }
 
 
-input{
+input[type="radio"]{
     display: none;
+}
+
+input[type="radio"]:disabled label{
+    color: #ccfbe8 !important;
 }
 
 input:checked + label {

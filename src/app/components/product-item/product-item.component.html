@@ -1,36 +1,50 @@
 <div class="container-md">
+  <!-- No product found -->
+  <div *ngIf="product == undefined">
+    <h4 class="text-center mt-5 text-secondary">No product found.</h4>
+  </div>
+
+  <!-- Product item display -->
   <div
     style="max-width: 1000px; height: 75vh; margin: 0 auto"
     class="d-lg-flex"
   >
-    <div class="row align-items-center">
+    <div *ngIf="product != undefined" class="row align-items-center">
       <div class="col-md-6 col-xl-7">
         <div class="p-2">
-          <img src="assets/images/img-3.jpg" alt="" style="width: 100%" />
+          <img src="{{ product?.image }}" alt="" style="width: 100%" />
         </div>
       </div>
       <div class="col-md-6 col-xl-5 mt-2">
         <div class="ps-5">
-          <h2 class="display-3">Slim Jacket</h2>
+          <h2 class="display-5">{{ product?.name }}</h2>
           <p class="display-6" style="font-size: 1.2rem; color: #216869">
-            Rs. 450
+            {{ product?.price }}
           </p>
           <br />
+
           <form [formGroup]="form" (submit)="addToCart()">
-            <p class="" style="font-size: 13px">Select Size</p>
+            <p
+              [ngClass]="{
+                'text-danger': !form.get('size')?.valid && formSubmitAttempt,
+                'fw-bold': !form.get('size')?.valid && formSubmitAttempt
+              }"
+              style="font-size: 13px"
+            >
+              Select Size
+            </p>
             <div class="size">
-              <input type="radio" value="s" id="small" formControlName="size" />
-              <div>
-                <label for="small">S</label>
-              </div>
-              <input
-                type="radio"
-                value="m"
-                id="medium"
-                formControlName="size"
-              />
-              <div>
-                <label for="medium">M</label>
+              <div *ngFor="let stock of product?.productStock; let i = index">
+                <input
+                  type="radio"
+                  value="{{ stock.size }}"
+                  id="{{ stock.size }}"
+                  formControlName="size"
+                  required
+                />
+                <label for="{{ stock.size }}" class="option">{{
+                  stock.size | uppercase
+                }}</label>
               </div>
             </div>
             <br />
@@ -41,16 +55,21 @@
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
               </select>
-              <button class="btn btn-outline-primary ms-3">Add to cart</button>
+              <button class="btn btn-outline-success ms-3">Add to cart</button>
             </div>
           </form>
           <p
             class="mt-4 display-6"
             style="text-align: justify; font-size: 15px"
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste
-            porro, aliquam asperiores natus, reiciendis eligendi pariatur
+            {{ product?.description }}
           </p>
         </div>
       </div>

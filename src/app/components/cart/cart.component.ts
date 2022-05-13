@@ -2,32 +2,55 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICartItem } from 'src/app/models/cartItem';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit{
   cart: ICartItem[] = [];
+  total: number = 0;
 
-  constructor(private location: Location, private router: Router) { }
+  constructor(private cartService: CartService, private location: Location, private router: Router) { }
 
   ngOnInit(): void {
-    this.cart = [
-      { product: {id: 1, name: "Jeans", numOfStock: 4, image: "assets/images/img-3.jpg", price: 200, categoryId: 2}, quantity: 2, size: "s"},
-    { product: {id: 1, name: "T Shirt", numOfStock: 4, image: "assets/images/img-3.jpg", price: 400, categoryId: 2}, quantity: 1, size: "m"}
-  ];
+    console.log("cart component");
+    this.cartService.getCart().subscribe({
+      next: data => this.cart = data,
+      error: err => console.log(err)
+    });
+    this.calculateTotal()
+  }
+
+
+  calculateTotal(){
+    this.total = 0;
+    this.cart.forEach((item) => {
+      this.total += item.product.price * item.quantity;
+    });
+  }
+
+  updateCart(productItem: ICartItem, quantity: number){
+    this.cartService.updateCart({...productItem, quantity});
+    this.calculateTotal();
+  }
+
+  removeItem(productItem: ICartItem){
+    this.cartService.deleteItemFromCart(productItem);
   }
 
   goToPreviousPage():void{
+    console.log("back");
+    
     this.location.back();
   }
 
   checkout():void{
     // logics
 
-    this.router.navigate(["/checkout/information"]);
+    this.router.navigate(["/checkout"]);
   }
 
 }

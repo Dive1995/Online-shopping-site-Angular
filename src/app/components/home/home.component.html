@@ -1,26 +1,41 @@
 <div
   class="banner"
-  style="background: url('assets/images/home-banner-2.jpeg') no-repeat"
+  style="background: url('assets/images/cover.jpg') no-repeat"
 ></div>
 <div class="container-md">
   <div class="categories mt-5">
     <div
       class="category-item fs-6 fw-bold"
-      style="background: url('assets/images/men.jpeg') no-repeat center"
+      style="
+        background: url('assets/images/men-section.jpeg') no-repeat center;
+        background-size: cover;
+        cursor: pointer;
+      "
+      routerLink="/products/men"
     >
       <div class="overlay"></div>
       <p class="display-6 fw-bold text-white">Men</p>
     </div>
     <div
       class="category-item fs-6 fw-bold"
-      style="background: url('assets/images/women.jpeg') no-repeat center"
+      style="
+        background: url('assets/images/women-section.jpeg') no-repeat center;
+        background-size: cover;
+        cursor: pointer;
+      "
+      routerLink="/products/women"
     >
       <div class="overlay"></div>
       <p class="display-6 fw-bold text-white">Women</p>
     </div>
     <div
       class="category-item fs-6 fw-bold"
-      style="background: url('assets/images/kids.jpeg') no-repeat center"
+      style="
+        background: url('assets/images/kids-section.jpeg') no-repeat center;
+        background-size: cover;
+        cursor: pointer;
+      "
+      routerLink="/products/kids"
     >
       <div class="overlay"></div>
       <p class="display-6 fw-bold text-white">Kids</p>
@@ -32,17 +47,6 @@
       class="products mt-5"
       style="overflow-x: scroll; white-space: nowrap; scrollbar-width: none"
     >
-      <div *ngFor="let product of products" class="me-3 w-25 d-inline-block">
-        <app-product [product]="product"></app-product>
-      </div>
-
-      <div *ngFor="let product of products" class="me-3 w-25 d-inline-block">
-        <app-product [product]="product"></app-product>
-      </div>
-
-      <div *ngFor="let product of products" class="me-3 w-25 d-inline-block">
-        <app-product [product]="product"></app-product>
-      </div>
       <div *ngFor="let product of products" class="me-3 w-25 d-inline-block">
         <app-product [product]="product"></app-product>
       </div>
@@ -63,17 +67,6 @@
       class="products mt-5"
       style="overflow-x: scroll; white-space: nowrap; scrollbar-width: none"
     >
-      <div *ngFor="let product of products" class="me-3 w-25 d-inline-block">
-        <app-product [product]="product"></app-product>
-      </div>
-
-      <div *ngFor="let product of products" class="me-3 w-25 d-inline-block">
-        <app-product [product]="product"></app-product>
-      </div>
-
-      <div *ngFor="let product of products" class="me-3 w-25 d-inline-block">
-        <app-product [product]="product"></app-product>
-      </div>
       <div *ngFor="let product of products" class="me-3 w-25 d-inline-block">
         <app-product [product]="product"></app-product>
       </div>

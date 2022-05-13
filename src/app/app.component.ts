@@ -16,10 +16,10 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
-   this.productService.getProducts().subscribe({
-     next: products => this.products = products,
-     error: (err: string) => this.errorMessage = err
-   });
+  //  this.productService.getProducts().subscribe({
+  //    next: products => this.products = products,
+  //    error: (err: string) => this.errorMessage = err
+  //  });
    
   }
 }
