@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ICartItem } from 'src/app/models/cartItem';
 import { IProduct } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -25,8 +26,9 @@ export class ProductItemComponent implements OnInit {
     private productService: ProductService, 
     private cartService: CartService, 
     private route: ActivatedRoute, 
-    private formBuilder: FormBuilder
-    ) {}
+    private formBuilder: FormBuilder,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit(): void {
     console.log("Product item component initialized !");
@@ -51,19 +53,9 @@ export class ProductItemComponent implements OnInit {
     if(this.form.valid){
       console.log(this.form.value);
       const cartItem = { product: this.product , quantity: this.form.value.quantity, size: this.form.value.size}
-      this.cartService.addItemToCart(cartItem)
+      this.cartService.addItemToCart(cartItem);
+      this.notificationService.showNotification("s", "Item added to cart successfully.");
     }
   }
   
-
-//   addToCart(data: NgForm){
-//     console.log("Add to cart");
-//     console.log(data.value);
-//     console.log(data.dirty);
-// console.log(data.controls);
-// Object.keys(data.controls).forEach(key => {
-//   data.controls[key].markAsTouched();
-// });
-//   }
-
 }

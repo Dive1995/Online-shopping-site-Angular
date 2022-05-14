@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     const userData = localStorage.getItem('user');
-    this.userSubject = new BehaviorSubject<any>(userData != null ? JSON.parse(userData) : null);
+    this.userSubject = new BehaviorSubject<any>(userData != null ? JSON.parse(userData).user : null);
   }
 
   logInUser(body: any): any{
@@ -26,7 +26,7 @@ export class AuthService {
 
   registerUser(body: any): any{
     return this.http.post(`${this.url}/register`, body).pipe(
-      tap((response: any) => localStorage.setItem('user', JSON.stringify(response)))
+      tap((response: any) => localStorage.setItem('user', JSON.stringify(response.user)))
     );
   }
 

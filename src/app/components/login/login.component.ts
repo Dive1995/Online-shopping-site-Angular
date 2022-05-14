@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   user: any;
   errorMessage!: string;
+  attemptToSubmit: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -29,11 +30,12 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void{
     // console.log(this.form.getRawValue());
+    this.attemptToSubmit = true;
+
     if(this.form.valid){
-      this.authService.logInUser(this.form.getRawValue()).subscribe({
+      this.authService.logInUser(this.form.value).subscribe({
         next: (user: any) => {
           this.user = user;
-          console.log(this.user);
           this.route.navigate(['/home'])
         },
         error: (err: any) => console.log(err.error)
@@ -44,6 +46,12 @@ export class LoginComponent implements OnInit {
       console.log(this.form.errors);
       alert("failed! validation error")
     }
+  }
 
+  isValid(field: string) {
+    return (
+      (this.form.get(field)?.dirty || this.form.get(field)?.touched) 
+      && !this.form.get(field)?.valid) 
+      || (!this.form.get(field)?.valid && this.attemptToSubmit)
   }
 }

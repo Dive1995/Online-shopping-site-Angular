@@ -24,6 +24,7 @@ import { CheckoutShippingComponent } from './components/checkout-shipping/checko
 import { CheckoutPaymentComponent } from './components/checkout-payment/checkout-payment.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CheckoutGuard } from './guards/checkout.guard';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { CheckoutGuard } from './guards/checkout.guard';
     CheckoutShippingComponent,
     CheckoutPaymentComponent,
     PageNotFoundComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

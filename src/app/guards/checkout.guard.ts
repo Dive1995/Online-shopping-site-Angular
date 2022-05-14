@@ -1,26 +1,35 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CartComponent } from '../components/cart/cart.component';
+import { AuthService } from '../services/auth.service';
 import { CartService } from '../services/cart.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CheckoutGuard implements CanActivate {
-  constructor(private cartService: CartService){
-
-  }
+  constructor(
+    private cartService: CartService, 
+    private authService: AuthService,
+    private route: Router
+    ){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let access = true;
-    this.cartService.getCart().subscribe(data => {
-      if(data.length == 0){
+    // this.cartService.getCart().subscribe(data => {
+    //   if(data.length == 0){
+    //     access = false;
+    //   }
+    // } )
+    this.authService.getUser().subscribe(data => {
+      if(data == null){
         access = false;
+        this.route.navigate(['/login'])
       }
-    } )
+    })
     return access;
   }
   

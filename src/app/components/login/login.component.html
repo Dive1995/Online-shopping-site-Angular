@@ -10,7 +10,14 @@
         required
         autofocus
         formControlName="email"
+        [ngClass]="{ 'is-invalid': isValid('email') }"
       />
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('email')?.errors?.['required']"
+      >
+        Email is required.
+      </div>
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
@@ -19,7 +26,14 @@
         class="form-control"
         id="password"
         formControlName="password"
+        [ngClass]="{ 'is-invalid': isValid('password') }"
       />
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('password')?.errors?.['required']"
+      >
+        Password is required.
+      </div>
     </div>
 
     <div class="d-grid mb-3">

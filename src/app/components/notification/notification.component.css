@@ -1,0 +1,15 @@
+.notification-container{
+    width: 20rem;
+    position: fixed;
+    top: 5rem;
+    right: 0.5rem;
+    z-index: 100;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    border-left: 10px solid;
+    border-radius: 2px;
+}
+
+p{
+    margin: 0;
+    font-size: 15px;
+}

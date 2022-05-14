@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from './models/product';
+import { NotificationService } from './services/notification.service';
 import { ProductService } from './services/product.service';
 
 @Component({
@@ -9,17 +10,14 @@ import { ProductService } from './services/product.service';
 })
 export class AppComponent implements OnInit{
   title = 'ShoppingFrontend';
-  products: IProduct[] = [];
-  errorMessage!: string;
+  showNotification!: boolean;
   
-  constructor(private productService: ProductService) {}
+  constructor(private nofificationService: NotificationService) {}
 
 
   ngOnInit(): void {
-  //  this.productService.getProducts().subscribe({
-  //    next: products => this.products = products,
-  //    error: (err: string) => this.errorMessage = err
-  //  });
-   
+    this.nofificationService.getNotificationData().subscribe(
+      data => this.showNotification = data.show
+    );
   }
 }

@@ -1,0 +1,11 @@
+<div
+  class="notification-container p-3 bg-white d-flex align-items-center justify-content-between"
+  [style.border-color]="borderColor"
+>
+  <p class="display-6 notification-content">
+    {{ borderColor }} {{ notification.status }} {{ notification.message }}
+  </p>
+  <span class="align-self-start" (click)="close()">
+    <fa-icon [icon]="['fas', 'close']"></fa-icon>
+  </span>
+</div>
