@@ -1,4 +1,7 @@
-<a [routerLink]="['/product', product.id]">
+<div
+  [routerLink]="['/product', product.id]"
+  class="product-container overflow-hidden"
+>
   <div class="product-img position-relative">
     <img
       src="{{ product.image }}"
@@ -7,10 +10,15 @@
       class="rounded"
     />
   </div>
-  <a
-    class="text-center"
-    style="color: #011936; letter-spacing: 1.2px; font-size: 14px"
-    >{{ product.name }}</a
+  <p
+    style="
+      color: #011936;
+      letter-spacing: 1.2px;
+      font-size: 14px;
+      word-wrap: break-all;
+    "
   >
-  <p style="color: #216869">$ {{ product.price }}</p>
-</a>
+    {{ product.name }}
+  </p>
+  <p style="color: #216869">LKR {{ product.price }}</p>
+</div>

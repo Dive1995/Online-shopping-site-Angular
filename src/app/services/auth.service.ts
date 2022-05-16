@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     const userData = localStorage.getItem('user');
-    this.userSubject = new BehaviorSubject<any>(userData != null ? JSON.parse(userData).user : null);
+    this.userSubject = new BehaviorSubject<any>(userData != null ? JSON.parse(userData) : null);
   }
 
   logInUser(body: any): any{
@@ -45,5 +45,9 @@ export class AuthService {
   logOutUser(): void{
     this.userSubject.next(null);
     localStorage.removeItem('user');
+  }
+
+  isLoggedIn(): boolean{
+    return this.userSubject.value ? true : false;
   }
 }

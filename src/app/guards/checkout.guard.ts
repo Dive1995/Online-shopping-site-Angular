@@ -12,7 +12,7 @@ export class CheckoutGuard implements CanActivate {
   constructor(
     private cartService: CartService, 
     private authService: AuthService,
-    private route: Router
+    private route: Router,
     ){}
 
   canActivate(
@@ -24,13 +24,21 @@ export class CheckoutGuard implements CanActivate {
     //     access = false;
     //   }
     // } )
-    this.authService.getUser().subscribe(data => {
-      if(data == null){
-        access = false;
-        this.route.navigate(['/login'])
-      }
-    })
-    return access;
+    // this.authService.getUser().subscribe(data => {
+    //   if(data == null){
+    //     access = false;
+    //     this.route.navigate(['/login'])
+    //   }
+    // })
+    // return access;
+
+    if(this.authService.isLoggedIn() && this.cartService.isCartEmpty()){
+      return true;
+    }
+    else{
+      this.route.navigate(['/login']);
+      return false;
+    }
   }
   
 }

@@ -27,13 +27,11 @@ export class NavbarComponent implements OnInit {
     this.authService.getUser().subscribe(
       (userData) => {
         this.user = userData;
-        console.log(userData);
       }
     )
   }
 
   logOut(){
-    console.log("logout");
     this.cartService.clearCart();
     this.authService.logOutUser();
     this.router.navigate(['/login']);

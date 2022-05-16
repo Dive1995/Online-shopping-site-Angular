@@ -2,12 +2,15 @@
   <div class="cart-container">
     <h3 class="display-6 fs-2 mb-4">{{ cart.length }} items in your cart</h3>
     <br />
+
     <!-- No products in cart -->
     <div *ngIf="cart.length == 0">
       <h3 class="text-secondary text-center">Add something to your cart !</h3>
     </div>
+
     <!-- Show cart items -->
     <div *ngIf="cart.length > 0">
+      <!-- Header -->
       <div class="row">
         <h6 class="col-7 fs-4">Item</h6>
         <h6 class="col-2 fs-4">Quantity</h6>
@@ -16,7 +19,8 @@
       </div>
       <hr />
 
-      <form>
+      <!-- Items -->
+      <div>
         <div *ngFor="let item of cart" class="row mb-3">
           <div class="col-7 d-flex align-items-center">
             <img
@@ -51,8 +55,8 @@
               <option value="10">10</option>
             </select>
           </div>
-          <!-- <p class="col-2 align-self-center">{{ item.quantity }}</p> -->
-          <p class="col-2 align-self-center">{{ item.product.price }}</p>
+
+          <p class="col-2 align-self-center">LKR {{ item.product.price }}</p>
           <a
             class="col-1 align-self-center text-black-50"
             (click)="removeItem(item)"
@@ -66,7 +70,7 @@
             <p>Total</p>
           </div>
           <div class="col-2 fw-bold total">
-            <p>{{ total }}</p>
+            <p>LKR {{ total }}</p>
           </div>
           <div class="col-1"></div>
         </div>
@@ -79,7 +83,7 @@
           </button>
           <button class="btn btn-danger" (click)="checkout()">Checkout</button>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICartItem } from 'src/app/models/cartItem';
 import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,12 @@ export class CartComponent implements OnInit{
   cart: ICartItem[] = [];
   total: number = 0;
 
-  constructor(private cartService: CartService, private location: Location, private router: Router) { }
+  constructor(
+    private cartService: CartService, 
+    private location: Location, 
+    private router: Router,
+    private notificationService: NotificationService
+    ) { }
 
   ngOnInit(): void {
     console.log("cart component");
@@ -39,6 +45,7 @@ export class CartComponent implements OnInit{
 
   removeItem(productItem: ICartItem){
     this.cartService.deleteItemFromCart(productItem);
+    this.notificationService.showNotification('info', 'Item removed from cart.')
   }
 
   goToPreviousPage():void{

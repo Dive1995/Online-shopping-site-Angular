@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private authService: AuthService,
-    private route: Router
+    private route: Router,
+    private notificationService: NotificationService
     ) { }
 
   ngOnInit(): void {
@@ -36,9 +38,13 @@ export class LoginComponent implements OnInit {
       this.authService.logInUser(this.form.value).subscribe({
         next: (user: any) => {
           this.user = user;
+          // this.notificationService.showNotification('success', `Hi ${user.userName}, enjoy your shopping !`)
           this.route.navigate(['/home'])
         },
-        error: (err: any) => console.log(err.error)
+        error: (err: any) => {
+          console.log(err.error);
+          this.notificationService.showNotification('danger', err.error)
+        }
       })
       
       

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ICartItem } from '../models/cartItem'
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class CartService {
   private _total: number = 0;
   private _cartItemSource = new BehaviorSubject<ICartItem[]>([]);
 
-  constructor() {
+  constructor(private notificationService: NotificationService) {
     let localStorageCart = localStorage.getItem('cart');
     if(localStorageCart){
       this._cart = JSON.parse(localStorageCart);
@@ -26,6 +27,7 @@ export class CartService {
     if(this.findIndexOfProduct(productItem) == -1){
       this._cart.push(productItem);
       this._cartItemSource.next(this._cart); // to notify the subscriber a new product is added
+      this.notificationService.showNotification('success', 'Item added to cart.');
       localStorage.setItem("cart", JSON.stringify(this._cart));
     }
     else{
@@ -37,6 +39,7 @@ export class CartService {
     const index = this.findIndexOfProduct(productItem);
     this._cart[index].quantity = productItem.quantity;
     this._cartItemSource.next(this._cart);
+    this.notificationService.showNotification('info', "Updated item");
     localStorage.setItem("cart", JSON.stringify(this._cart));
   }
 
@@ -62,6 +65,8 @@ export class CartService {
     return this._cart.findIndex(item => item.product.id == productItem.product.id && item.size == productItem.size)
   }
 
-
+  isCartEmpty(){
+    return this._cart.length > 0 ? true : false;
+  }
 
 }

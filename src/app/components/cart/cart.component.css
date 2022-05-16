@@ -10,7 +10,7 @@ a:hover fa-icon{
 .cart-container{
     max-width: 900px;
     margin: 4rem auto;
-    height: 65vh;
+    min-height: 60vh;
 }
 
 .quantity{

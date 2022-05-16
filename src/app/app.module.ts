@@ -25,6 +25,7 @@ import { CheckoutPaymentComponent } from './components/checkout-payment/checkout
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CheckoutGuard } from './guards/checkout.guard';
 import { NotificationComponent } from './components/notification/notification.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -53,8 +54,8 @@ import { NotificationComponent } from './components/notification/notification.co
     FontAwesomeModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
+      { path: 'login', canActivate: [AuthGuard], component: LoginComponent },
+      { path: 'register', canActivate: [AuthGuard], component: RegisterComponent },
       { path: 'products/:section', component: ProductsPageComponent },
       { path: 'product/:id', component: ProductItemComponent },
       { path: 'cart', component: CartComponent },

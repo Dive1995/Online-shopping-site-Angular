@@ -54,7 +54,7 @@ export class ProductItemComponent implements OnInit {
       console.log(this.form.value);
       const cartItem = { product: this.product , quantity: this.form.value.quantity, size: this.form.value.size}
       this.cartService.addItemToCart(cartItem);
-      this.notificationService.showNotification("s", "Item added to cart successfully.");
+      // this.notificationService.showNotification("success", "Item added to cart successfully.");
     }
   }
   
