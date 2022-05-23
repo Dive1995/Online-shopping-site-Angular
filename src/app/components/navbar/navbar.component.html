@@ -41,19 +41,27 @@
       <li class="nav-item">
         <div class="dropdown">
           <a
-            class="btn btn-secondary dropdown-toggle"
-            role="button"
+            class="nav-link text-secondary dropdown-toggle"
             id="dropdownMenuLink"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            *ngIf="user"
+            style="cursor: pointer"
           >
-            Dropdown link
+            {{ user?.userName }}
           </a>
-
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item text-secondary">Profile</a></li>
+            <li>
+              <a class="dropdown-item text-secondary" routerLink="/orders"
+                >Order History</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item text-secondary" href="#"
+                >Change Password</a
+              >
+            </li>
           </ul>
         </div>
       </li>

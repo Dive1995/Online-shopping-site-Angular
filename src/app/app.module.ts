@@ -26,6 +26,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { CheckoutGuard } from './guards/checkout.guard';
 import { NotificationComponent } from './components/notification/notification.component';
 import { AuthGuard } from './guards/auth.guard';
+import { OrdersComponent } from './components/orders/orders.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { AuthGuard } from './guards/auth.guard';
     CheckoutPaymentComponent,
     PageNotFoundComponent,
     NotificationComponent,
+    OrdersComponent,
+    OrderItemComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +65,8 @@ import { AuthGuard } from './guards/auth.guard';
       { path: 'products/:section', component: ProductsPageComponent },
       { path: 'product/:id', component: ProductItemComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'orders', component: OrdersComponent },
+      { path: 'order/:id', component: OrderItemComponent },
       { path: 'checkout', canActivate: [CheckoutGuard], component: CheckoutComponent, 
       // children:[
       //   { path: '', redirectTo: 'information', pathMatch: 'full' },

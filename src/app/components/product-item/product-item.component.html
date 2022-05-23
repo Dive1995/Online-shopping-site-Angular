@@ -62,7 +62,14 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
               </select>
-              <button class="btn btn-outline-success ms-3">Add to cart</button>
+              <button
+                class="btn btn-outline-success ms-3"
+                type="submit"
+                data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
+              >
+                Add to cart
+              </button>
             </div>
           </form>
           <p
@@ -76,3 +83,24 @@
     </div>
   </div>
 </div>
+<!-- 
+<div
+  class="offcanvas offcanvas-end show.bs.offcanvas"
+  [class.show]="showSideBar"
+  tabindex="-1"
+  id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel"
+  style="visibility: visible"
+  data-bs-backdrop="true"
+>
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">...</div>
+</div> -->

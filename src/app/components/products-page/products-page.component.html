@@ -1,75 +1,46 @@
-<div
-  style="
-    background: url('assets/images/{{ section }}-banner.jpeg') no-repeat;
-  "
-  class="banner d-flex justify-content-center align-items-center"
->
-  <h1 class="text-white display-1" style="letter-spacing: 3px">
-    {{ section | uppercase }}'S COLLECTION
-  </h1>
-</div>
-<div class="container mt-5">
-  <!-- Loading -->
-  <div *ngIf="isLoading" class="d-flex justify-content-center">
-    <div class="spinner-grow text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-light" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-success" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-light" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-danger" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-light" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-warning" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-light" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-info" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-light" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-dark" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
+<div style="min-height: 90vh">
+  <div
+    style="
+      background: url('assets/images/{{ section }}-banner.jpeg') no-repeat;
+    "
+    class="banner d-flex justify-content-center align-items-center"
+  >
+    <h1 class="text-white display-1" style="letter-spacing: 3px">
+      {{ section | uppercase }}'S COLLECTION
+    </h1>
   </div>
-  <!-- No products -->
-  <div *ngIf="!isLoading && products.length <= 0">
-    <h4 class="display-6 fs-4 text-center text-secondary">
-      Currently no products are available to show.
-    </h4>
-  </div>
+  <div class="container mt-5">
+    <!-- Loading -->
+    <app-loading [isLoading]="isLoading"></app-loading>
 
-  <div *ngIf="errorMessage">
-    <h4 class="display-6 fs-4 text-center text-secondary">
-      Server error occured. Please try again later.
-    </h4>
-  </div>
-
-  <!-- List of Products -->
-  <div *ngIf="!isLoading && products.length > 0">
-    <div class="mb-5 mt-5">
-      <ul class="d-flex justify-content-center text-secondary">
-        <li class="display-6 fs-5" style="border-bottom: 1px solid red">All</li>
-        <li class="display-6 fs-5">T-Shirt</li>
-        <li class="display-6 fs-5">Shirt</li>
-      </ul>
+    <!-- No products -->
+    <div *ngIf="!isLoading && products.length <= 0">
+      <h4 class="display-6 fs-4 text-center text-secondary">
+        Currently no products are available to show.
+      </h4>
     </div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-      <div *ngFor="let product of products" class="col p-md-3">
-        <app-product [product]="product"></app-product>
+
+    <div *ngIf="errorMessage">
+      <h4 class="display-6 fs-4 text-center text-secondary">
+        Server error occured. Please try again later.
+      </h4>
+    </div>
+
+    <!-- List of Products -->
+    <div *ngIf="!isLoading && products.length > 0">
+      <div class="mb-5 mt-5">
+        <ul class="d-flex justify-content-center text-secondary">
+          <li class="display-6 fs-5" style="border-bottom: 1px solid red">
+            All
+          </li>
+          <li class="display-6 fs-5">T-Shirt</li>
+          <li class="display-6 fs-5">Shirt</li>
+        </ul>
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+        <div *ngFor="let product of products" class="col p-md-3">
+          <app-product [product]="product"></app-product>
+        </div>
       </div>
     </div>
   </div>

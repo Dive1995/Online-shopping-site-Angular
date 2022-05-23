@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ICartItem } from 'src/app/models/cartItem';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
+import { EmailService } from 'src/app/services/email.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-checkout',
@@ -23,25 +26,26 @@ export class CheckoutComponent implements OnInit {
   shipping: any | undefined;
 
   
-
-
-  // TODO:  
-  // create array of delivery options => { type:, price:, days: }
   deliveryOptions = [
     { type: 'standard', price: 350, days: 6 },
     { type: 'express', price: 750, days: 2 },
   ]
-  // create a selected delivery option field
+
   selectedDeliveryOption: any = 'standard'
 
-  // set standard price as selected
   shippingPrice!: number;
+
+  // returned order details
+  orderDetailsReturned: any;
 
 
   constructor(
     private cartService: CartService,
     private checkoutService: CheckoutService,
-    private authService: AuthService 
+    private authService: AuthService,
+    private route: Router,
+    private notificationService: NotificationService,
+    private emailService: EmailService 
     ) { }
 
   ngOnInit(): void {    
@@ -98,16 +102,38 @@ export class CheckoutComponent implements OnInit {
     }
     console.log(order);
 
-
-    this.checkoutService.addNewOrder(order).subscribe(
-      data => {
-        console.log(data);
-        alert(data.message);
+    this.checkoutService.addNewOrder(order).subscribe({
+      next: data => {
+        this.orderDetailsReturned = data;
         this.cartService.clearCart();
-        //TODO: route to invoice
+        this.notificationService.showNotification('success',data.message);
+        this.route.navigate([`/order/${data.order.id}`]);
       },
-      error => console.log(error)
-    )
+      error: error => console.log(error),
+      complete: () => console.log("email sent")
+    })
+  }
+
+  sendSuccessEmail(order: any){
+    // TODO: 
+    // 1. Call an email service
+    this.emailService.sendOrderSuccessEmail({
+      toEmail: 'diveshan@gmail.com',
+      subject: "Order Confirmation.",
+      body: "<h1 style='color: gold'>Thank You for shopping with us</h1>"
+    }).subscribe({
+      next: data => console.log("Data returned from email res : "+data),
+      error: (err) => console.log("Error occured in email req : "+err),
+      complete: () => console.log("Email has been send")
+    })
+
+    // 2. Pass order detail to order item page
+    // 3. Send the email as
+    // {
+    // "toEmail": "dmail@gmail.com",
+    // "subject": "Order confirmation.",
+    // "body": "Order item html"
+    // }
   }
 
   calculateTotal(){
