@@ -1,4 +1,4 @@
-<div style="min-height: 90vh">
+<div style="min-height: 150vh">
   <div
     style="
       background: url('assets/images/{{ section }}-banner.jpeg') no-repeat;
@@ -9,7 +9,7 @@
       {{ section | uppercase }}'S COLLECTION
     </h1>
   </div>
-  <div class="container mt-5">
+  <div class="container mt-5 mb-5">
     <!-- Loading -->
     <app-loading [isLoading]="isLoading"></app-loading>
 
@@ -29,12 +29,31 @@
     <!-- List of Products -->
     <div *ngIf="!isLoading && products.length > 0">
       <div class="mb-5 mt-5">
-        <ul class="d-flex justify-content-center text-secondary">
-          <li class="display-6 fs-5" style="border-bottom: 1px solid red">
+        <ul
+          class="d-flex justify-content-center text-secondary"
+          *ngIf="categories.length > 0"
+        >
+          <li
+            class="display-6 fs-5"
+            (click)="getCategoryOfProducts('all')"
+            [ngStyle]="{
+              'border-bottom':
+                selectedCategory == 'all' ? '2px solid #216869' : ''
+            }"
+          >
             All
           </li>
-          <li class="display-6 fs-5">T-Shirt</li>
-          <li class="display-6 fs-5">Shirt</li>
+          <li
+            class="display-6 fs-5"
+            *ngFor="let category of categories"
+            (click)="getCategoryOfProducts(category.id)"
+            [ngStyle]="{
+              'border-bottom':
+                selectedCategory == category.id ? '2px solid #216869' : ''
+            }"
+          >
+            {{ category.name }}
+          </li>
         </ul>
       </div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">

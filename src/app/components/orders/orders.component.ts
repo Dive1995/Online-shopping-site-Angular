@@ -16,8 +16,7 @@ export class OrdersComponent implements OnInit {
     this.isLoading = true;
     this.orderService.getAllOrders().subscribe({
       next: data => {
-        this.orders = data.orders;
-        console.log(this.orders)
+        this.orders = data;
       },
       error: err => console.log(err),
       complete: () => this.isLoading = false

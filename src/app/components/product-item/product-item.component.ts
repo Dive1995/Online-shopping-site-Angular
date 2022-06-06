@@ -19,7 +19,6 @@ export class ProductItemComponent implements OnInit {
   formSubmitAttempt: boolean = false;
   errorMessage: string | undefined;
   id: number | undefined;
-  showSideBar:boolean = false;
 
 
   constructor(
@@ -49,13 +48,9 @@ export class ProductItemComponent implements OnInit {
   }
 
   addToCart(){
-    console.log('add item to cart');
-    
     this.formSubmitAttempt = true;
-    this.showSideBar = !this.showSideBar;
     if(this.form.valid){
-      console.log(this.form.value);
-      const cartItem = { product: this.product , quantity: this.form.value.quantity, size: this.form.value.size}
+      const cartItem = { product: this.product , quantity: Number(this.form.value.quantity), size: this.form.value.size}
       this.cartService.addItemToCart(cartItem);
       // this.notificationService.showNotification("success", "Item added to cart successfully.");
     }

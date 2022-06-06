@@ -9,6 +9,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrderItemComponent implements OnInit {
   order: any;
+  loading: boolean = false;
 
   constructor(
     private route: ActivatedRoute, 
@@ -16,6 +17,7 @@ export class OrderItemComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.loading = true;
     const param = Number(this.route.snapshot.paramMap.get('id')) || -1;
     console.log(param);
     this.orderService.getOrderById(param).subscribe({
@@ -26,7 +28,8 @@ export class OrderItemComponent implements OnInit {
       error: (err) => {
         console.log(err);
         this.router.navigate(['/orders'])
-      }
+      },
+      complete: () => this.loading = false
     })
   }
 

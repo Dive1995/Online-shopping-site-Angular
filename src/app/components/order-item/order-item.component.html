@@ -1,5 +1,6 @@
-<div class="container-md mt-5">
+<div class="container-md mt-5 content">
   <div style="max-width: 60vw; margin: 0 auto">
+    <app-loading [isLoading]="loading"></app-loading>
     <div *ngIf="order">
       <h2 class="display-6">Order #{{ order.id }}</h2>
       <p
@@ -8,24 +9,27 @@
           color: order.shipping.status == 'ordered' ? '#3777FF' : '#007C77'
         }"
       >
-        {{ order.shipping.status }}
+        {{ order.shipping.status | titlecase }}
       </p>
 
       <div class="row mt-4">
         <div class="col-6 lh-1">
           <h6 class="fw-bold">Shipping Address</h6>
           <p class="text-secondary">
-            {{ order.shipping.firstName }} {{ order.shipping.lastName }}
+            {{ order.shipping.firstName | titlecase }}
+            {{ order.shipping.lastName | titlecase }}
           </p>
-          <p class="text-secondary">{{ order.shipping.address }}</p>
+          <p class="text-secondary">{{ order.shipping.address | titlecase }}</p>
           <p class="text-secondary">{{ order.shipping.phoneNum }}</p>
         </div>
         <div class="col-6 lh-1">
           <h6 class="fw-bold">Payment Method</h6>
-          <p class="text-secondary">{{ order.invoice.paymentMethod }}</p>
+          <p class="text-secondary">
+            {{ order.invoice.paymentMethod | titlecase }}
+          </p>
           <h6 class="fw-bold">Expected delivery date</h6>
           <p class="text-secondary">
-            {{ convertDate(order.invoice.paymentDate) }}
+            {{ convertDate(order.shipping.expectedDeliveryDate) }}
           </p>
         </div>
       </div>
@@ -43,13 +47,13 @@
         <div *ngFor="let item of order.orderItems" class="row mb-3">
           <div class="col-8 d-flex align-items-center">
             <img
-              src="{{ item.image }}"
+              src="{{ item.product.image }}"
               alt=""
               style="width: 70px"
               class="me-4"
             />
             <p class="">
-              {{ item.name }},
+              {{ item.product.name }},
               <span class="fw-bold">{{ item.size | uppercase }}</span>
             </p>
           </div>
@@ -73,7 +77,9 @@
           <p class="text-secondary" style="font-size: 15px">Subtotal</p>
         </div>
         <div class="col-2">
-          <p>LKR {{ order.invoice.total }}</p>
+          <p>
+            LKR {{ order.invoice.total - order.shipping.deliveryOption.price }}
+          </p>
         </div>
       </div>
       <div class="row">
@@ -82,7 +88,9 @@
           <p class="text-secondary" style="font-size: 15px">Shipping</p>
         </div>
         <div class="col-2">
-          <p style="font-size: 15px">LKR {{ order.invoice.total }}</p>
+          <p style="font-size: 15px">
+            LKR {{ order.shipping.deliveryOption.price }}
+          </p>
         </div>
       </div>
       <div class="row">

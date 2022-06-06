@@ -12,8 +12,8 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<IProduct[]>{
-    return this.http.get<IProduct[]>(`${this.url}/category/1`);
+  getProductsByCategory(id: number): Observable<IProduct[]>{
+    return this.http.get<IProduct[]>(`${this.url}/category/${id}`);
   }
 
   getProductSection(section: string): Observable<IProduct[]> {
@@ -25,7 +25,7 @@ export class ProductService {
     return this.http.get<IProduct>(`${this.url}/${id}`)
   }
 
-  // getCategories(section: string){
-  //   return this.http.get(`${this.url}`)
-  // }
+  getCategories(section: string){
+    return this.http.get(`http://localhost:5000/api/category/${section}`);
+  }
 }

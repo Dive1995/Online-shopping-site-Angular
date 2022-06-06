@@ -16,6 +16,9 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   products: IProduct[] = [];
   isLoading: boolean = false;
   errorMessage: string | undefined;
+  categories: any;
+  selectedCategory: string = 'all';
+
   // womensProducts: IProduct[] = []
   // kidsProducts: IProduct[] = []
 
@@ -26,6 +29,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
     this.paramSubscription = this.route.paramMap.subscribe(params => {
       this.section = String(params.get('section'));
       this.getProducts(String(params.get('section')));
+      this.getCategories(this.section);
     });
     
   }
@@ -37,10 +41,44 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
       error: error => {
         this.errorMessage = error,
         console.log(this.errorMessage);
-        
-      }, 
+      },
       complete: () => this.isLoading = false
     })
+  }
+
+  getCategories(section: string){
+    this.productService.getCategories(section).subscribe({
+      next: (data) => {
+        this.categories = data;
+        console.log(data);
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+
+  getCategoryOfProducts(category: any){
+    console.log("Category : " + category);
+    // prevents from refreshing current page when same category is clicked
+    if(this.selectedCategory == category){
+      return;
+    }
+    this.selectedCategory = category;
+    this.isLoading = true;
+
+    if(category == "all"){
+      this.getProducts(this.section);
+    }
+    else{
+      this.productService.getProductsByCategory(category).subscribe({
+        next: returnedProducts => this.products = returnedProducts,
+        error: error => {
+          this.errorMessage = error,
+          console.log(this.errorMessage);
+        },
+        complete: () => this.isLoading = false
+      })
+    }
   }
   
   ngOnDestroy(): void {

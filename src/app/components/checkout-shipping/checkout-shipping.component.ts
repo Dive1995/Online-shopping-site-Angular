@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DeliveryOptionsService } from 'src/app/services/delivery-options.service';
 
 @Component({
   selector: 'app-checkout-shipping',
@@ -16,10 +17,16 @@ export class CheckoutShippingComponent implements OnInit {
 
   @Input() selectedDeliveryOption: any;
 
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+  constructor() { }
 
   ngOnInit(): void {
    
+  }
+
+  calculateDays(day: number){
+    let today = new Date();
+    const expectedDeliveryDate = new Date(today.setDate(today.getDate() + day));
+    return expectedDeliveryDate.toDateString();
   }
 
   setDeliveryOptions(option: string){

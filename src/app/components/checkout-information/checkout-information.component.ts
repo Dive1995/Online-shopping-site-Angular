@@ -27,7 +27,7 @@ export class CheckoutInformationComponent implements OnInit {
     this.informationForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      address: ['', [Validators.required, Validators.maxLength(30)]],
+      address: ['', [Validators.required, Validators.maxLength(250)]],
       postalCode: [null],
       phoneNum: [null, [Validators.required, Validators.pattern("^[0-9]{9}$")]]
     })

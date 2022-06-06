@@ -16,33 +16,15 @@
       for="{{ option.type }}"
       class="option d-flex justify-content-between"
     >
-      <span>{{ option.type }} Shipping</span>
+      <div>
+        <div>{{ option.type | titlecase }} Shipping</div>
+        <div class="text-secondary" style="font-size: 13px">
+          Expected delivery on: {{ calculateDays(option.days) }}
+        </div>
+      </div>
       <span>Rs. {{ option.price }}</span>
     </label>
   </div>
-
-  <!-- (change)="goToPayment.emit(option)" -->
-
-  <!-- <div>
-      <input
-        type="radio"
-        name="delivery"
-        id="standard"
-        value="standard"
-        checked
-      />
-      <label for="standard" class="option d-flex justify-content-between">
-        <span>Standard Shipping</span>
-        <span>Rs. {{ standardShipping.price }}</span>
-      </label>
-    </div>
-    <div>
-      <input type="radio" name="delivery" id="express" value="express" />
-      <label for="express" class="option d-flex justify-content-between">
-        <span>Express Shipping</span>
-        <span>Rs. 450</span>
-      </label>
-    </div> -->
 
   <!-- buttons -->
   <div class="mt-5 d-flex justify-content-between">

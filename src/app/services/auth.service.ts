@@ -35,7 +35,11 @@ export class AuthService {
   }
 
   getUserId(){
-    return this.userSubject.value.id
+    return this.userSubject.value.id;
+  }
+
+  getUserValue(){
+    return this.userSubject.value;
   }
 
   getUserToken(){
