@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void{
-    // console.log(this.form.getRawValue());
     this.attemptToSubmit = true;
 
     if(this.form.valid){

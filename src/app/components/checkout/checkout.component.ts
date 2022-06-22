@@ -95,7 +95,7 @@ export class CheckoutComponent implements OnInit {
     this.geToNextStep();
   }
 
-  confirmOrder($event: any){
+  async confirmOrder($event: any){
     this.isLoading = true;
     console.log(this.isLoading);
     this.paymentMethod = $event;
@@ -119,6 +119,7 @@ export class CheckoutComponent implements OnInit {
       "customerId": this.currentUser.id,
       "email" : this.currentUser.email,
       "OrderItems": orderItems,
+      "OrderDate": new Date().toISOString(),
       "shipping": shipping,
       "invoice": {
           "total": this.subtotal,
@@ -127,7 +128,7 @@ export class CheckoutComponent implements OnInit {
     }
     console.log(order);
 
-    this.checkoutService.addNewOrder(order).subscribe({
+    (await this.checkoutService.addNewOrder(order)).subscribe({
       next: data => {
         this.orderDetailsReturned = data;
         this.cartService.clearCart();

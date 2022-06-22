@@ -19,6 +19,7 @@ export class ProductItemComponent implements OnInit {
   formSubmitAttempt: boolean = false;
   errorMessage: string | undefined;
   id: number | undefined;
+  selectedSize: string | undefined;
 
 
   constructor(
@@ -30,12 +31,14 @@ export class ProductItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("Product item component initialized !");
-    
     this.id = Number(this.route.snapshot.paramMap.get("id"));
 
     this.productService.getSingleProduct(this.id).subscribe({
-      next: (returnedProduct) => this.product = returnedProduct,
+      next: (returnedProduct) => {
+        this.product = returnedProduct;
+        console.log(returnedProduct);
+        
+      },
       error: (err) => console.log(err.error),
       complete: () => console.log("completed")
        
@@ -45,6 +48,12 @@ export class ProductItemComponent implements OnInit {
       size : ['', Validators.required],
       quantity: 1
     })
+  }
+
+  updateSize(size: string){
+    this.selectedSize = size;
+    console.log(this.selectedSize);
+    
   }
 
   addToCart(){

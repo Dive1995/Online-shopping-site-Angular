@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
+import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +11,28 @@ export class AuthService {
   private url: string = "http://localhost:5000/api/users";
   userSubject!: BehaviorSubject<any>;
 
-  constructor(private http: HttpClient) {
-    const userData = localStorage.getItem('user');
+  constructor(
+    private http: HttpClient,
+    private localstorageService: LocalstorageService
+    ) {
+    const userData = localstorageService.getItem('user');
+    console.log(userData);
     this.userSubject = new BehaviorSubject<any>(userData != null ? JSON.parse(userData) : null);
   }
 
   logInUser(body: any): any{
-    return this.http.post(`${this.url}/login`, body).pipe(
+    return this.http.post(`${this.url}/login`, body, {withCredentials: true}).pipe(
       tap((response: any) => {
-        localStorage.setItem('user', JSON.stringify(response));
+        console.log("Response for login fn : "+response);
+        this.localstorageService.setItem('user', JSON.stringify(response));
         this.userSubject.next(response);
       })
     );
   }
 
   registerUser(body: any): any{
-    return this.http.post(`${this.url}/register`, body).pipe(
-      tap((response: any) => localStorage.setItem('user', JSON.stringify(response.user)))
+    return this.http.post(`${this.url}/register`, body, {withCredentials: true}).pipe(
+      tap((response: any) => this.localstorageService.setItem('user', JSON.stringify(response.user)))
     );
   }
 
@@ -48,7 +54,7 @@ export class AuthService {
 
   logOutUser(): void{
     this.userSubject.next(null);
-    localStorage.removeItem('user');
+    this.localstorageService.removeItem('user');
   }
 
   isLoggedIn(): boolean{

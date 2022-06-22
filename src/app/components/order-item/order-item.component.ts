@@ -16,11 +16,11 @@ export class OrderItemComponent implements OnInit {
     private orderService: OrderService, 
     private router: Router) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.loading = true;
     const param = Number(this.route.snapshot.paramMap.get('id')) || -1;
     console.log(param);
-    this.orderService.getOrderById(param).subscribe({
+    (await this.orderService.getOrderById(param)).subscribe({
       next: (data) => {
         this.order = data;
         console.log(this.order);

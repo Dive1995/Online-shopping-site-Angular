@@ -40,6 +40,7 @@
                   value="{{ stock.size }}"
                   id="{{ stock.size }}"
                   formControlName="size"
+                  (click)="updateSize(stock.size)"
                   required
                 />
                 <label for="{{ stock.size }}" class="option">{{
@@ -62,6 +63,45 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
               </select>
+              <!-- <div *ngFor="let productItem of product.productStock">
+                <select
+                  formControlName="quantity"
+                  id=""
+                  class="quantity"
+                  *ngIf="
+                    selectedSize == productItem.size &&
+                    productItem.quantity > 20
+                  "
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+
+                <select
+                  formControlName="quantity"
+                  id=""
+                  class="quantity"
+                  *ngIf="
+                    selectedSize == productItem.size &&
+                    productItem.quantity <= 20
+                  "
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div> -->
+
               <button
                 class="btn btn-outline-success ms-3"
                 type="submit"
@@ -83,24 +123,3 @@
     </div>
   </div>
 </div>
-<!-- 
-<div
-  class="offcanvas offcanvas-end show.bs.offcanvas"
-  [class.show]="showSideBar"
-  tabindex="-1"
-  id="offcanvasRight"
-  aria-labelledby="offcanvasRightLabel"
-  style="visibility: visible"
-  data-bs-backdrop="true"
->
-  <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel">Offcanvas right</h5>
-    <button
-      type="button"
-      class="btn-close text-reset"
-      data-bs-dismiss="offcanvas"
-      aria-label="Close"
-    ></button>
-  </div>
-  <div class="offcanvas-body">...</div>
-</div> -->

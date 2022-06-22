@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ICartItem } from '../models/cartItem'
+import { LocalstorageService } from './localstorage.service';
 import { NotificationService } from './notification.service';
 
 @Injectable({
@@ -11,10 +12,14 @@ export class CartService {
   private _total: number = 0;
   private _cartItemSource = new BehaviorSubject<ICartItem[]>([]);
 
-  constructor(private notificationService: NotificationService) {
-    let localStorageCart = localStorage.getItem('cart');
+  constructor(
+    private notificationService: NotificationService,
+    private localstorageService: LocalstorageService
+    ) {
+    let localStorageCart = localstorageService.getItem('cart');
     if(localStorageCart){
-      this._cart = JSON.parse(localStorageCart);
+      console.log(localStorageCart)
+      this._cart = localStorageCart;
       this._cartItemSource.next(this._cart);
     }
   }
@@ -28,7 +33,7 @@ export class CartService {
       this._cart.push(productItem);
       this._cartItemSource.next(this._cart); // to notify the subscriber a new product is added
       this.notificationService.showNotification('success', 'Item added to cart.');
-      localStorage.setItem("cart", JSON.stringify(this._cart));
+      this.localstorageService.setItem("cart", this._cart);
     }
     else{
       this.updateCart(productItem);
@@ -40,7 +45,7 @@ export class CartService {
     this._cart[index].quantity = productItem.quantity;
     this._cartItemSource.next(this._cart);
     this.notificationService.showNotification('info', "Updated item");
-    localStorage.setItem("cart", JSON.stringify(this._cart));
+    this.localstorageService.setItem("cart", this._cart);
   }
 
   deleteItemFromCart(productItem: ICartItem){
@@ -48,7 +53,7 @@ export class CartService {
     let index = this.findIndexOfProduct(productItem);
     this._cart.splice(index,1)
     this._cartItemSource.next(this._cart);
-    localStorage.setItem("cart", JSON.stringify(this._cart));
+    this.localstorageService.setItem("cart", this._cart);
   }
 
   getCart(){
@@ -57,7 +62,7 @@ export class CartService {
 
   clearCart(){
     this._cart = [];
-    localStorage.setItem("cart", JSON.stringify(this._cart));
+    this.localstorageService.setItem("cart", this._cart);
     this._cartItemSource.next(this._cart);
   }
 

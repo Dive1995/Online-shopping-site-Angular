@@ -29,6 +29,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { OrderGuard } from './guards/order.guard';
 
 @NgModule({
   declarations: [
@@ -65,8 +66,8 @@ import { LoadingComponent } from './components/loading/loading.component';
       { path: 'products/:section', component: ProductsPageComponent },
       { path: 'product/:id', component: ProductItemComponent },
       { path: 'cart', component: CartComponent },
-      { path: 'orders', component: OrdersComponent },
-      { path: 'order/:id', component: OrderItemComponent },
+      { path: 'orders', canActivate: [OrderGuard], component: OrdersComponent },
+      { path: 'order/:id', canActivate: [OrderGuard], component: OrderItemComponent },
       { path: 'checkout', canActivate: [CheckoutGuard], component: CheckoutComponent, 
       // children:[
       //   { path: '', redirectTo: 'information', pathMatch: 'full' },

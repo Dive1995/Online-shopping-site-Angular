@@ -12,9 +12,9 @@ export class OrdersComponent implements OnInit {
 
   constructor(private orderService: OrderService) { }
   
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.isLoading = true;
-    this.orderService.getAllOrders().subscribe({
+    (await this.orderService.getAllOrders()).subscribe({
       next: data => {
         this.orders = data;
       },
